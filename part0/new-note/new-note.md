@@ -5,7 +5,7 @@ sequenceDiagram
     participant browser
     participant server
 
-    user->>browser: Inputs a new note title, clicks 'save'
+    user->>browser: Inputs a new note name, clicks 'save'
 
     browser->>server: POST https://fullstack-exampleapp.herokuapp.com/new_note
     server-->>browser: HTTP status code 302
