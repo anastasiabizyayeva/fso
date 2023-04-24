@@ -12,6 +12,11 @@ const personsService = {
     const response = await request;
     return response.data;
   },
+  update: async (updatedObject) => {
+    const request = axios.put(`${baseUrl}/${updatedObject.id}`, updatedObject);
+    const response = await request;
+    return response.data;
+  },
   deletePerson: async (id) => {
     const request = axios.delete(`${baseUrl}/${id}`);
     const response = await request;
