@@ -1,16 +1,6 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
       "name": "Dan Abramov",
       "number": "12-43-234345",
       "id": 3
@@ -24,31 +14,6 @@
       "name": "Martha Stewart",
       "number": "123-456-789",
       "id": 5
-    },
-    {
-      "name": "Milton Friedman",
-      "number": "123-456-789",
-      "id": 6
-    },
-    {
-      "name": "Eleanor Rigby",
-      "number": "123-456-789",
-      "id": 7
-    },
-    {
-      "name": "Johan Friedrich Bach",
-      "number": "123-456-789",
-      "id": 8
-    },
-    {
-      "name": "Kat can Cook",
-      "number": "45-34-56",
-      "id": 9
-    },
-    {
-      "name": "Waluigi",
-      "number": "987-654-321",
-      "id": 10
     }
   ]
 }

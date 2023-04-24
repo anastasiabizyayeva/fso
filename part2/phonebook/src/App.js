@@ -49,6 +49,14 @@ const App = () => {
     setNewPhoneNumber("");
   };
 
+  const handlePersonDelete = (currentPerson) => {
+    if (window.confirm(`Delete ${currentPerson.name}?`)) {
+      personService.deletePerson(currentPerson.id).then((returnedDelete) => {
+        setPersons(persons.filter((person) => person.id !== currentPerson.id));
+      });
+    }
+  };
+
   return (
     <div>
       <h1>Phonebook</h1>
@@ -62,7 +70,7 @@ const App = () => {
         submitAction={addPerson}
       />
       <h2>Numbers</h2>
-      <Persons persons={namesToShow} />
+      <Persons persons={namesToShow} deleteFunction={handlePersonDelete} />
     </div>
   );
 };

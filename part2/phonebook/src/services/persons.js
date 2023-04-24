@@ -12,6 +12,11 @@ const personsService = {
     const response = await request;
     return response.data;
   },
+  deletePerson: async (id) => {
+    const request = axios.delete(`${baseUrl}/${id}`);
+    const response = await request;
+    return response.data;
+  },
 };
 
 export default personsService;
