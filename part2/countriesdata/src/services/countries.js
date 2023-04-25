@@ -7,7 +7,6 @@ const countriesService = {
       `${baseUrl}/name/${countryName}?fields=name,capital,area,languages,flags`
     );
     const response = await request;
-    console.log(response.data);
     return response.data;
   },
 };
