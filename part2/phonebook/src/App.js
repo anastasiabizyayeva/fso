@@ -81,6 +81,14 @@ const App = () => {
             setTimeout(() => {
               setMessage(null);
             }, 2000);
+          })
+          .catch((error) => {
+            setMessage(
+              `Information of ${personToUpdate.name} has already been removed from server.`
+            );
+            setTimeout(() => {
+              setMessage(null);
+            }, 2000);
           });
       }
     }
