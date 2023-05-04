@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const CountryFlag = ({ flag }) => {
   return <img src={flag.png} alt={flag.alt}></img>;
 };
@@ -18,11 +20,31 @@ const LanguageList = ({ languages }) => {
 };
 
 const MultiCountry = ({ countries }) => {
-  return countries.map((country) => (
-    <ul key={country.name.common}>
-      <li>{country.name.common}</li>
-    </ul>
-  ));
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
+  const handleShowClick = (country) => {
+    setSelectedCountry(country);
+  };
+
+  const handleBackClick = () => {
+    setSelectedCountry(null);
+  };
+
+  if (selectedCountry) {
+    return (
+      <>
+        <button onClick={handleBackClick}>Back</button>
+        <SoloCountryStats country={selectedCountry} />
+      </>
+    );
+  } else {
+    return countries.map((country) => (
+      <p key={country.name.common}>
+        {country.name.common}{" "}
+        <button onClick={() => handleShowClick(country)}>show</button>
+      </p>
+    ));
+  }
 };
 
 const SoloCountryStats = ({ country }) => {
