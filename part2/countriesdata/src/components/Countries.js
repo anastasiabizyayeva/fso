@@ -19,8 +19,8 @@ const LanguageList = ({ languages }) => {
 
 const MultiCountry = ({ countries }) => {
   return countries.map((country) => (
-    <ul>
-      <li key={country.name}>{country.name.common}</li>
+    <ul key={country.name.common}>
+      <li>{country.name.common}</li>
     </ul>
   ));
 };
@@ -39,9 +39,13 @@ const SoloCountryStats = ({ country }) => {
 };
 
 export const Countries = ({ countries }) => {
-  if (countries.length > 1) {
+  if (countries.length < 1) {
+    return <p>No countries found</p>;
+  } else if (countries.length > 1 && countries.length <= 10) {
     return <MultiCountry countries={countries} />;
-  } else {
+  } else if (countries.length === 1) {
     return <SoloCountryStats country={countries[0]} />;
+  } else {
+    return <p>Too many matches, specify another filter</p>;
   }
 };
