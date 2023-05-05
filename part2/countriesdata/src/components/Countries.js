@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import weatherService from "../services/weather";
 
 const CountryFlag = ({ flag }) => {
   return <img src={flag.png} alt={flag.alt}></img>;
@@ -15,6 +16,37 @@ const LanguageList = ({ languages }) => {
           <li key={language}>{language}</li>
         ))}
       </ul>
+    </>
+  );
+};
+
+const CapitalWeather = ({ capital }) => {
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
+  useEffect(() => {
+    weatherService.getLongitudeLatitude(capital).then((dimensions) => {
+      const cityLatitude = dimensions[0];
+      const cityLongitude = dimensions[1];
+
+      setLatitude(cityLatitude);
+      setLongitude(cityLongitude);
+    });
+  }, [capital]);
+
+  const temperature = 0;
+  const wind = 0;
+
+  return (
+    <>
+      <h1>Weather in {capital}</h1>
+      <p> Here's some shit </p>
+      <p>Latitude {latitude}</p>
+      <p>Longitude {longitude}</p>
+      <br />
+      <p>temperature {temperature} Celsius</p>
+      <p>Icon</p>
+      <p>wind {wind} m/s</p>
     </>
   );
 };
@@ -56,6 +88,7 @@ const SoloCountryStats = ({ country }) => {
       <LanguageList languages={country.languages} />
       <br />
       <CountryFlag flag={country.flags} />
+      <CapitalWeather capital={country.capital[0]} />
     </>
   );
 };
