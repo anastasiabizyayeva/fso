@@ -21,32 +21,34 @@ const LanguageList = ({ languages }) => {
 };
 
 const CapitalWeather = ({ capital }) => {
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [weather, setWeather] = useState({ temperature: null, wind: null });
+  const [icon, setIcon] = useState(null);
+  const [weatherAlt, setWeatherAlt] = useState(null);
 
   useEffect(() => {
     weatherService.getLongitudeLatitude(capital).then((dimensions) => {
-      const cityLatitude = dimensions[0];
-      const cityLongitude = dimensions[1];
-
-      setLatitude(cityLatitude);
-      setLongitude(cityLongitude);
+      const newLat = dimensions[0];
+      const newLon = dimensions[1];
+      weatherService.getCapitalWeather([newLat, newLon]).then((weather) => {
+        const newTemp = weather.main.temp;
+        const newWind = weather.wind.speed;
+        const newIcon = weather.weather[0].icon;
+        const newAlt = weather.weather[0].description;
+        setWeather({ temperature: newTemp, wind: newWind });
+        setIcon(newIcon);
+        setWeatherAlt(newAlt);
+      });
     });
   }, [capital]);
 
-  const temperature = 0;
-  const wind = 0;
+  const iconUrl = icon && `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
   return (
     <>
       <h1>Weather in {capital}</h1>
-      <p> Here's some shit </p>
-      <p>Latitude {latitude}</p>
-      <p>Longitude {longitude}</p>
-      <br />
-      <p>temperature {temperature} Celsius</p>
-      <p>Icon</p>
-      <p>wind {wind} m/s</p>
+      {weather.temperature && <p>temperature {weather.temperature} Celsius</p>}
+      {iconUrl && <img src={iconUrl} alt={weatherAlt} />}
+      {weather.wind && <p>wind {weather.wind} m/s</p>}
     </>
   );
 };
